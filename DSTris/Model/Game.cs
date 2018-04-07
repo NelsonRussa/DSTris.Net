@@ -46,5 +46,10 @@ namespace DSTris.Model
         {
             State = GameState.ExitGame;
         }
+
+        //
+        public void Update()
+        {
+        }
     }
 }
