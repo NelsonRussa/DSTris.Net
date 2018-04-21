@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <game
+      gridWidth="32"
+      gridHeight="32"
+      playableWidth="10"
+      playableHeight="20"
+      assetsFolder="Assets"
+      fontName="arial.ttf"
+    />
+  <background
+    textureName="background.png"
+    gameCoordX="83"
+    gameCoordY="60"
+    nextBlockCoordX="493"
+    nextBlockCoordY="92"
+    />
+  <blocks>
+    <block textureName="block-lightblue.png">
+      0100
+      0100
+      0100
+      0100
+    </block>
+    <block textureName="block-blue.png">
+      100
+      111
+    </block>
+    <block textureName="block-orange.png">
+      001
+      111
+    </block>
+    <block textureName="block-yellow.png">
+      11
+      11
+    </block>
+    <block textureName="block-green.png">
+      011
+      110
+    </block>
+    <block textureName="block-purple.png">
+      010
+      111
+    </block>
+    <block textureName="block-red.png">
+      110
+      011
+    </block>
+  </blocks>
+</config>

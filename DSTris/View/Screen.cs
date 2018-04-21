@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.Window;
 using DSTris.Model;
+using SFML.System;
 
 namespace DSTris.View
 {
@@ -16,10 +17,14 @@ namespace DSTris.View
         // ou quando é pedido para fechar a janela
         public event EventHandler OnClosed = null;
         //
+        private const bool SHOW_FPS = true;
         private RenderWindow renderWindow;
+        private Clock clock;
+        private int frames = 0;
+        private Text txtFPS;
 
         // Inicializar ecran onde vai ser mostrado o jogo
-        public Screen(uint width, uint height, string title)
+        public Screen(uint width, uint height, string title, string fullFontName)
         {
             renderWindow = new RenderWindow(new VideoMode(width, height), title);
             renderWindow.SetActive(true);
@@ -28,6 +33,13 @@ namespace DSTris.View
             // ou quando a janela é fechada
             renderWindow.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressedEvent);
             renderWindow.Closed += new EventHandler(OnClosedEvent);
+            //
+            clock = new Clock();
+
+            txtFPS = new Text("", new Font(fullFontName));
+            txtFPS.CharacterSize = 20;
+            txtFPS.Color = new Color(Color.White);
+            txtFPS.Position = new Vector2f(0, 0);
         }
 
         // Mostrar estado atual do jogo
@@ -38,6 +50,21 @@ namespace DSTris.View
 
             // Desenhar os objectos do jogo
 
+
+            //
+            if (SHOW_FPS)
+            {
+                frames++;
+                if (clock.ElapsedTime.AsSeconds() > 1)
+                {
+                    var time = clock.Restart().AsSeconds();
+                    int fps = (int)(frames / time);
+                    frames = 0;
+
+                    txtFPS.DisplayedString = $"{fps} FPS";
+                }
+                renderWindow.Draw(txtFPS);
+            }
 
             renderWindow.Display();
         }

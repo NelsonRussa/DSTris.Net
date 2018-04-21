@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DSTris.View;
 using DSTris.Model;
 using SFML.Window;
+using System.IO;
 
 namespace DSTris
 {
@@ -22,14 +23,24 @@ namespace DSTris
         {
             // Criar o objecto que vai conter toda a informação do jogo
             game = new Game();
-            
+            try
+            {
+                game.Initialize();
+            }
+            catch(FileNotFoundException ex)
+            {
+                Console.WriteLine($"Excepção ao inicializar o jogo: {ex.Message} ({ex.FileName})");
+                Console.ReadKey();
+                return;
+            }
+
             // Inicializar o ecran
-            var screen = new Screen(1024, 768, "DSTris - Projecto para LabDS");
+            var screen = new Screen(1024, 768, "DSTris - Projecto para LabDS", game.FullFontName);
             // Subscrever aos inputs da view para teclas pressionadas e ao fechar 
             // a janela
             screen.OnKeyPressed += OnKeyPressed;
             screen.OnClosed += OnClosed;
-            
+
             // Ciclo principal do jogo
             // Termina quando o estado do jogo for para sair
             while (game.State != Game.GameState.ExitGame)
