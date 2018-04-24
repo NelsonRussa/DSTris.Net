@@ -35,7 +35,7 @@ namespace DSTris
             }
 
             // Inicializar o ecran
-            var screen = new Screen(1024, 768, "DSTris - Projecto para LabDS", game.FullFontName);
+            var screen = new Screen(1024, 768, "DSTris - Projecto para LabDS", game.FontName);
             // Subscrever aos inputs da view para teclas pressionadas e ao fechar 
             // a janela
             screen.OnKeyPressed += OnKeyPressed;

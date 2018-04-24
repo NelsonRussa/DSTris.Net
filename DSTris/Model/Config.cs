@@ -14,12 +14,34 @@ namespace DSTris.Model
         // Guardar as configurações gerais do jogo
         public class GameConfig
         {
+            public class BackgroundConfig
+            {
+                public string TextureName { get; set; }
+                public Vector2f GameCoords { get; set; }
+                public Vector2f NextBlockCoords { get; set; }
+            }
+
             public string AssetsFolder { get; set; }
             public string FontName { get; set; }
-            public string FullFontName { get { return $"{AssetsFolder}\\{FontName}"; } }
-        }
-        public GameConfig Game;
+            public BackgroundConfig Background;
 
+            public GameConfig()
+            {
+                Background = new BackgroundConfig();
+            }
+
+        }
+        public class MenuConfig
+        {
+            public class BackgroundConfig
+            {
+                public string TextureName { get; set; }
+            }
+            public BackgroundConfig Background;
+        }
+        //
+        public GameConfig Game;
+        public MenuConfig Menu;
 
         // 
         public void Load()
@@ -35,13 +57,41 @@ namespace DSTris.Model
             // Ler configurações do jogo
 
             // Config/Game
-            var nodeGame = xmlDocElem.SelectSingleNode("/config/game");
             Game = new GameConfig();
+            var nodeGame = xmlDocElem.SelectSingleNode("/config/game");
             Game.AssetsFolder = nodeGame.Attributes["assetsFolder"].Value;
-            Game.FontName = nodeGame.Attributes["fontName"].Value;
-            if (!File.Exists(Game.FullFontName))
+            Game.FontName = GetAssetFullName(nodeGame.Attributes["fontName"].Value);
+            if (!File.Exists(Game.FontName))
                 throw new FileNotFoundException("Ficheiro da fonte não encontrado!", Game.FontName);
+            // - Background
+            var nodeGameBackground = nodeGame.SelectSingleNode("background");
+            Game.Background = new GameConfig.BackgroundConfig();
+            Game.Background.TextureName = GetAssetFullName(nodeGameBackground.Attributes["textureName"].Value);
+            if (!File.Exists(Game.Background.TextureName))
+                throw new FileNotFoundException("Ficheiro de textura não encontrado!", Game.Background.TextureName);
+            Game.Background.GameCoords = new Vector2f(
+                Convert.ToSingle(nodeGameBackground.Attributes["gameCoordX"].Value),
+                Convert.ToSingle(nodeGameBackground.Attributes["gameCoordY"].Value));
+            Game.Background.NextBlockCoords = new Vector2f(
+                Convert.ToSingle(nodeGameBackground.Attributes["nextBlockCoordX"].Value),
+                Convert.ToSingle(nodeGameBackground.Attributes["nextBlockCoordY"].Value));
 
+            // Config/Menu
+            Menu = new MenuConfig();
+            var nodeMenu = xmlDocElem.SelectSingleNode("/config/menu");
+            // - Background
+            var nodeMenuBackground = nodeMenu.SelectSingleNode("background");
+            Menu.Background = new MenuConfig.BackgroundConfig();
+            Menu.Background.TextureName = GetAssetFullName(nodeMenuBackground.Attributes["textureName"].Value);
+            if (!File.Exists(Menu.Background.TextureName))
+                throw new FileNotFoundException("Ficheiro de textura não encontrado!", Menu.Background.TextureName);
+
+        }
+
+        //
+        public string GetAssetFullName(string name)
+        {
+            return $"{Game.AssetsFolder}\\{name}";
         }
     }
 }

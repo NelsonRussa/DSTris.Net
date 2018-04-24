@@ -49,7 +49,18 @@ namespace DSTris.View
             renderWindow.DispatchEvents();
 
             // Desenhar os objectos do jogo
+            if (game.State == Game.GameState.Menu)
+                renderWindow.Draw(game.BackgroundMenu);
+            else
+                renderWindow.Draw(game.BackgroundGame);
 
+
+
+            // Overlay text
+            if (game.State == Game.GameState.GameOver)
+                renderWindow.Draw(game.txtGameOver);
+            else if (game.State == Game.GameState.Paused)
+                renderWindow.Draw(game.txtPaused);
 
             //
             if (SHOW_FPS)

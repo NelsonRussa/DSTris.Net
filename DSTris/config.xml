@@ -1,20 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <config>
+  <!--
+  Imagem fundo menu: https://pixabay.com/en/rectangles-647267/
+  
+  -->
   <game
       gridWidth="32"
       gridHeight="32"
       playableWidth="10"
       playableHeight="20"
       assetsFolder="Assets"
-      fontName="arial.ttf"
-    />
-  <background
-    textureName="background.png"
-    gameCoordX="83"
-    gameCoordY="60"
-    nextBlockCoordX="493"
-    nextBlockCoordY="92"
-    />
+      fontName="arial.ttf">
+    <background
+      textureName="background-game.png"
+      gameCoordX="373"
+      gameCoordY="30"
+      nextBlockCoordX="783"
+      nextBlockCoordY="62" />
+  </game>
+  <menu>
+    <background
+      textureName="background-menu.png"
+     />
+  </menu>
   <blocks>
     <block textureName="block-lightblue.png">
       0100

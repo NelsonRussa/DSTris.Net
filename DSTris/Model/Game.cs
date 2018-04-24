@@ -1,4 +1,6 @@
-﻿using SFML.Window;
+﻿using SFML.Graphics;
+using SFML.System;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +22,12 @@ namespace DSTris.Model
             ExitGame
         }
         public GameState State { get; set; } = GameState.Menu;
-        public Config Config;
-        public string FullFontName { get { return Config.Game.FullFontName; }  }
+        public string FontName { get { return Config.Game.FontName; }  }
+        private Config Config;
+        public Sprite BackgroundMenu { get; set; }
+        public Sprite BackgroundGame { get; set; }
+        public Text txtGameOver;
+        public Text txtPaused;
 
         //
         public Game()
@@ -33,6 +39,22 @@ namespace DSTris.Model
         {
             Config = new Config();
             Config.Load();
+
+            //
+            BackgroundMenu = new Sprite(new Texture(Config.Menu.Background.TextureName));
+            BackgroundGame = new Sprite(new Texture(Config.Game.Background.TextureName));
+            //
+            txtGameOver = new Text("Game Over", new Font(FontName));
+            txtGameOver.CharacterSize = 50;
+            txtGameOver.Style = Text.Styles.Bold;
+            txtGameOver.Color = new Color(Color.Red);
+            txtGameOver.Position = new Vector2f(400, 300);
+            //
+            txtPaused = new Text("P A U S E", new Font(FontName));
+            txtPaused.CharacterSize = 50;
+            txtPaused.Style = Text.Styles.Bold;
+            txtPaused.Color = new Color(Color.White);
+            txtPaused.Position = new Vector2f(425, 300);
         }
 
         //
