@@ -44,6 +44,7 @@
     <Compile Include="main.cs" />
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="View\Debug.cs" />
     <Compile Include="View\Screen.cs" />
   </ItemGroup>
   <ItemGroup>

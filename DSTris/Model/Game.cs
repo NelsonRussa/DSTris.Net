@@ -15,6 +15,7 @@ namespace DSTris.Model
         // 
         public enum GameState
         {
+            Initializing,
             Menu,
             Playing,
             Paused,
@@ -127,9 +128,6 @@ namespace DSTris.Model
                         break;
                 }
             }
-
-            // Debug
-            Console.WriteLine($"Estado atual: {State}");
         }
 
         //

@@ -25,7 +25,7 @@ Clone do Tetris 2D usando a biblioteca [SFML.Net](https://www.sfml-dev.org/downl
   * [ ] Guardar grelha com peças que já pousaram
   * [ ] Desenhar peça atual, proxima e grelha de jogo
 * Jogabilidade
-  * [ ] Ler input do utilizador para mover e roddar as peças
+  * [ ] Ler input do utilizador para mover e rodar as peças
   * [ ] Validar posição
   * [ ] Quando houver colisão na descida, pousar a peça
   * [ ] Verificar se cria linha

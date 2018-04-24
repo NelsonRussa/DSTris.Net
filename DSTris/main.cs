@@ -21,6 +21,7 @@ namespace DSTris
 
         static void Main()
         {
+            Game.GameState previousGameState= Game.GameState.Initializing;
             // Criar o objecto que vai conter toda a informação do jogo
             game = new Game();
             try
@@ -29,8 +30,7 @@ namespace DSTris
             }
             catch(FileNotFoundException ex)
             {
-                Console.WriteLine($"Excepção ao inicializar o jogo: {ex.Message} ({ex.FileName})");
-                Console.ReadKey();
+                Debug.ShowMessage($"Excepção ao inicializar o jogo: {ex.Message} ({ex.FileName})", true);
                 return;
             }
 
@@ -49,6 +49,13 @@ namespace DSTris
                 game.Update();
                 // Mostrar estado atual do jogo
                 screen.Render(game);
+
+                // 
+                if (game.State != previousGameState)
+                {
+                    Debug.ShowMessage($"Estado atual: {game.State}");
+                    previousGameState = game.State;
+                }
             }
 
             // O estado do jogo indica que é para sair. Avisar a view
