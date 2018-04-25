@@ -28,9 +28,9 @@ namespace DSTris
             {
                 game.Initialize();
             }
-            catch(FileNotFoundException ex)
+            catch(ConfigFileMissingException ex)
             {
-                Debug.ShowMessage($"Excepção ao inicializar o jogo: {ex.Message} ({ex.FileName})", true);
+                Debug.ShowMessage($"Excepção ao inicializar o jogo: {ex.Message}", true);
                 return;
             }
 

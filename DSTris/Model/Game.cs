@@ -3,6 +3,7 @@ using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,14 @@ namespace DSTris.Model
         public void Initialize()
         {
             Config = new Config();
-            Config.Load();
+            try
+            {
+                Config.Load();
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new ConfigFileMissingException($"Ficheiro de configuração não encontrado ({ex.FileName})");
+            }
 
             //
             BackgroundMenu = new Sprite(new Texture(Config.Menu.Background.TextureName));
