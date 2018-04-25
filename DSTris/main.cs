@@ -30,7 +30,7 @@ namespace DSTris
             }
             catch(ConfigFileMissingException ex)
             {
-                Debug.ShowMessage($"Excepção ao inicializar o jogo: {ex.Message}", true);
+                Debug.ShowMessage($"Excepção ao inicializar o jogo: {ex.Message} ({ex.FileName})", true);
                 return;
             }
 

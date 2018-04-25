@@ -46,7 +46,7 @@ namespace DSTris.Model
             }
             catch (FileNotFoundException ex)
             {
-                throw new ConfigFileMissingException($"Ficheiro de configuração não encontrado ({ex.FileName})");
+                throw new ConfigFileMissingException($"Ficheiro de configuração não encontrado", ex.FileName);
             }
 
             //
