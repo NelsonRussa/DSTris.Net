@@ -20,7 +20,7 @@ Clone do Tetris 2D usando a biblioteca [SFML.Net](https://www.sfml-dev.org/downl
 * Estrutura
   * [X] Criar pasta para os assets, contem a fonte, imagens e sons
   * [X] Mostrar imagens de fundo nos vários estados (menu e em jogo)
-  * [ ] Ler restantes dados da configuração 
+  * [X] Ler restantes dados da configuração 
   * [ ] Gerar bloco em jogo e proximo bloco
   * [ ] Guardar grelha com peças que já pousaram
   * [ ] Desenhar peça atual, proxima e grelha de jogo

@@ -39,9 +39,16 @@ namespace DSTris.Model
             }
             public BackgroundConfig Background;
         }
+        public class BlockConfig
+        {
+            public string TextureName { get; set; }
+            public List<Vector2i> Parts { get; set; }
+            public Vector2f Size { get; set; }
+        }
         //
         public GameConfig Game;
         public MenuConfig Menu;
+        public List<BlockConfig> Blocks;
 
         // 
         public void Load()
@@ -86,6 +93,26 @@ namespace DSTris.Model
             if (!File.Exists(Menu.Background.TextureName))
                 throw new FileNotFoundException("Ficheiro de textura não encontrado!", Menu.Background.TextureName);
 
+            // Blocks
+            var nodeBlocks = xmlDocElem.SelectNodes("/config/blocks/block");
+            Blocks = new List<BlockConfig>();
+            foreach (XmlNode nodeBlock in nodeBlocks)
+            {
+                var block = new BlockConfig();
+                block.TextureName = nodeBlock.Attributes["textureName"].Value;
+                string[] blockLines = nodeBlock.InnerText.Trim().Split('\n');
+                block.Size = new Vector2f(blockLines[0].Trim().Length, blockLines.Length);
+                block.Parts = new List<Vector2i>();
+                for (int l = 0; l < block.Size.Y; l++)
+                {
+                    for (int c = 0; c < block.Size.X; c++)
+                    {
+                        if (blockLines[l].Trim().Substring(c, 1) == "1")
+                            block.Parts.Add(new Vector2i(c, l));
+                    }
+                }
+                Blocks.Add(block);
+            }
         }
 
         //

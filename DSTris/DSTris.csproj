@@ -45,6 +45,7 @@
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\ConfigFileMissingException.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\IRender.cs" />
     <Compile Include="View\Debug.cs" />
     <Compile Include="View\Screen.cs" />
   </ItemGroup>

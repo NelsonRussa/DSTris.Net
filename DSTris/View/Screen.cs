@@ -43,24 +43,14 @@ namespace DSTris.View
         }
 
         // Mostrar estado atual do jogo
-        public void Render(Game game)
+        public void Render(IRender render)
         {
             renderWindow.Clear(Color.Black);
             renderWindow.DispatchEvents();
 
-            // Desenhar os objectos do jogo
-            if (game.State == Game.GameState.Menu)
-                renderWindow.Draw(game.BackgroundMenu);
-            else
-                renderWindow.Draw(game.BackgroundGame);
-
-
-
-            // Overlay text
-            if (game.State == Game.GameState.GameOver)
-                renderWindow.Draw(game.txtGameOver);
-            else if (game.State == Game.GameState.Paused)
-                renderWindow.Draw(game.txtPaused);
+            // Desenhar os objectos que implementam a interface
+            foreach (var r in render.DrawObjects)
+                renderWindow.Draw(r);
 
             //
             if (SHOW_FPS)

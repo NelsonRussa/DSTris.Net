@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ using static SFML.Window.Keyboard;
 
 namespace DSTris.Model
 {
-    class Game
+    class Game: IRender
     {
         // 
         public enum GameState
@@ -30,6 +31,31 @@ namespace DSTris.Model
         public Sprite BackgroundGame { get; set; }
         public Text txtGameOver;
         public Text txtPaused;
+
+        public IEnumerable<Drawable> DrawObjects
+        {
+            get
+            {
+                // Retornar os objectos do jogo que podem ser desenhados
+                // pela ordem de prioridade
+
+                // Background
+                if (State == Game.GameState.Menu)
+                    yield return BackgroundMenu;
+                else
+                    yield return BackgroundGame;
+
+                // Objectos do jogo
+                // ...
+
+
+                // Foreground
+                if (State == Game.GameState.GameOver)
+                    yield return txtGameOver;
+                else if (State == Game.GameState.Paused)
+                    yield return txtPaused;
+            }
+        }
 
         //
         public Game()
