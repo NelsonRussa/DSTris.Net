@@ -23,6 +23,8 @@ namespace DSTris.Model
 
             public string AssetsFolder { get; set; }
             public string FontName { get; set; }
+            public Vector2i GridSize { get; set; }
+            public Vector2i PlayableSize { get; set; }
             public BackgroundConfig Background;
 
             public GameConfig()
@@ -70,6 +72,12 @@ namespace DSTris.Model
             Game.FontName = GetAssetFullName(nodeGame.Attributes["fontName"].Value);
             if (!File.Exists(Game.FontName))
                 throw new FileNotFoundException("Ficheiro da fonte não encontrado!", Game.FontName);
+            Game.GridSize = new Vector2i(
+                Convert.ToInt32(nodeGame.Attributes["gridWidth"].Value),
+                Convert.ToInt32(nodeGame.Attributes["gridHeight"].Value));
+            Game.PlayableSize = new Vector2i(
+                Convert.ToInt32(nodeGame.Attributes["playableWidth"].Value),
+                Convert.ToInt32(nodeGame.Attributes["playableHeight"].Value));
             // - Background
             var nodeGameBackground = nodeGame.SelectSingleNode("background");
             Game.Background = new GameConfig.BackgroundConfig();

@@ -21,22 +21,25 @@ Clone do Tetris 2D usando a biblioteca [SFML.Net](https://www.sfml-dev.org/downl
   * [X] Criar pasta para os assets, contem a fonte, imagens e sons
   * [X] Mostrar imagens de fundo nos vários estados (menu e em jogo)
   * [X] Ler restantes dados da configuração 
-  * [ ] Gerar bloco em jogo e proximo bloco
-  * [ ] Guardar grelha com peças que já pousaram
-  * [ ] Desenhar peça atual, proxima e grelha de jogo
+  * [X] Gerar bloco em jogo e proximo bloco
+  * [X] Guardar grelha com peças que já pousaram
+  * [X] Desenhar peça atual, proxima e grelha de jogo
 * Jogabilidade
-  * [ ] Ler input do utilizador para mover e rodar as peças
-  * [ ] Validar posição
-  * [ ] Quando houver colisão na descida, pousar a peça
-  * [ ] Verificar se cria linha
-  * [ ] Limpar linhas e mover peças em posição superior
+  * [X] Ler input do utilizador para mover e rodar as peças
+  * [X] Validar posição
+  * [X] Quando houver colisão na descida, pousar a peça
+  * [X] Verificar se cria linha
+  * [X] Limpar linhas e mover peças em posição superior
   * [X] Colocar o jogo em pausa e retomar
+  * [ ] Contabilizar pontos
+  * [ ] Mostrar estatistica das peças que sairam
+  * [ ] Criar niveis (aumentando a dificuldade)
 * Testes
   * [X] Validar existencia dos ficheiros lidos (configuração, texturas e fonte)
   * [X] Mostrar estado atual do jogo na consola
   * [X] Adicionar contador de frames por segundo, para ter noção se tem velocidade aceitavel
   * [X] Validar publicação para confirmar que todos os ficheiros estão a ser distribuidos
-  * [ ] Ao mover as peças, não sobrepor as existentes na grelha do jogo
-  * [ ] Não mover peças para fora da área de jogo
-  * [ ] Quando gerar nova peça, se não conseguir colocar na grelha dar jogo como terminado
+  * [X] Ao mover as peças, não sobrepor as existentes na grelha do jogo
+  * [X] Não mover peças para fora da área de jogo
+  * [X] Quando gerar nova peça, se não conseguir colocar na grelha dar jogo como terminado
 	
