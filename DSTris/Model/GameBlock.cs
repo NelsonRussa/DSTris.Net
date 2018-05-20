@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSTris.Model
 {
-    class GameBlock
+    class GameBlock : IPeca
     {
         public List<GameBlockPart> Parts { get; set; } = null;
         private Vector2f _screenPosition;
@@ -82,6 +82,15 @@ namespace DSTris.Model
 
             //
             Size = new Vector2i(maxX + 1, maxY + 1);
+        }
+
+        // Quando for pedido para desenhar a peça, 
+        // desenha cada parte do bloco
+        public void Draw(RenderTarget target, RenderStates states)
+        {
+            //
+            foreach(var part in Parts)
+                target.Draw(part.Sprite);
         }
     }
 }

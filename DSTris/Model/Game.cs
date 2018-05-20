@@ -74,16 +74,11 @@ namespace DSTris.Model
                     //
                     // Bloco em jogo
                     if (CurrentBlock.Visible)
-                    {
-                        foreach (var gameBlockPart in CurrentBlock.Parts)
-                            yield return gameBlockPart.Sprite;
-                    }
+                        yield return CurrentBlock;
+
                     // Proximo bloco
                     if (NextBlock.Visible)
-                    {
-                        foreach (var gameBlockPart in NextBlock.Parts)
-                            yield return gameBlockPart.Sprite;
-                    }
+                        yield return NextBlock;
 
                     // Texto foreground
                     if (State == GameState.GameOver)

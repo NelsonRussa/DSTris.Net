@@ -47,6 +47,7 @@
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\GameBlock.cs" />
     <Compile Include="Model\GameBlockPart.cs" />
+    <Compile Include="Model\IPeca.cs" />
     <Compile Include="Model\IRender.cs" />
     <Compile Include="View\Debug.cs" />
     <Compile Include="View\Screen.cs" />
