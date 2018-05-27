@@ -16,7 +16,10 @@
       gameCoordX="373"
       gameCoordY="30"
       nextBlockCoordX="783"
-      nextBlockCoordY="62" />
+      nextBlockCoordY="62"
+      statsX="110"
+      statsY="310"
+      statsMaxY="90"/>
   </game>
   <menu>
     <background
@@ -24,33 +27,33 @@
      />
   </menu>
   <blocks>
-    <block textureName="block-lightblue.png">
+    <block textureName="block-lightblue.png" statsColor="0,240,239">
       0100
       0100
       0100
       0100
     </block>
-    <block textureName="block-blue.png">
+    <block textureName="block-blue.png" statsColor="0,0,240">
       100
       111
     </block>
-    <block textureName="block-orange.png">
+    <block textureName="block-orange.png" statsColor="240,160,1">
       001
       111
     </block>
-    <block textureName="block-yellow.png">
+    <block textureName="block-yellow.png" statsColor="241,240,0">
       11
       11
     </block>
-    <block textureName="block-green.png">
+    <block textureName="block-green.png" statsColor="1,240,0">
       011
       110
     </block>
-    <block textureName="block-purple.png">
+    <block textureName="block-purple.png" statsColor="159,0,240">
       010
       111
     </block>
-    <block textureName="block-red.png">
+    <block textureName="block-red.png" statsColor="186,0,16">
       110
       011
     </block>

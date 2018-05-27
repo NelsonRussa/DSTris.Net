@@ -32,12 +32,16 @@ namespace DSTris.Model
         public Vector2i GridPosition { get; set; }
         public bool Visible { get; set; } = true;
         public Vector2i Size { get; set; }
+        public int ConfigBlockID { get; set; }
+        public Color StatsColor { get; set; }
         private Texture Texture;
 
         //
-        public GameBlock(Texture texture, List<Vector2i> PartPositions)
+        public GameBlock(int configBlockID, Color statsColor, Texture texture, List<Vector2i> PartPositions)
         {
             // Inicializar propriedades do novo bloco
+            ConfigBlockID = configBlockID;
+            StatsColor = statsColor;
             ScreenPosition = new Vector2f(0, 0);
             GridPosition = new Vector2i(0, 0);
             Texture = texture;

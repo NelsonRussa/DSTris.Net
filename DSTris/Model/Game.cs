@@ -38,6 +38,7 @@ namespace DSTris.Model
         private Random Rnd;
         private float DropVelocity = 1f;
         private Clock GameTime;
+        public Statistics Statistics;
         private enum PositionValidation
         {
             OK,
@@ -80,6 +81,10 @@ namespace DSTris.Model
                     if (NextBlock.Visible)
                         yield return NextBlock;
 
+                    // Desenhar as estatisticas dos 
+                    // blocos que já sairam
+                    yield return Statistics;
+
                     // Texto foreground
                     if (State == GameState.GameOver)
                         yield return txtGameOver;
@@ -106,6 +111,7 @@ namespace DSTris.Model
             {
                 throw new ConfigFileMissingException($"Ficheiro de configuração não encontrado", ex.FileName);
             }
+            Statistics = new Statistics(Config.Game.Background.StatsCoords, Config.Game.Background.StatsMaxY);
 
             //
             BackgroundMenu = new Sprite(new Texture(Config.Menu.Background.TextureName));
@@ -244,7 +250,6 @@ namespace DSTris.Model
         {
             NextBlock = GetRandomBlock();
             NextBlock.ScreenPosition = Config.Game.Background.NextBlockCoords;
-
         }
 
         // Gerar novo bloco em jogo. Será o que estava definido como proximo bloco em jogo
@@ -258,7 +263,10 @@ namespace DSTris.Model
             CurrentBlock = NextBlock;
             // Posicionar o bloco em jogo no topo/meio da área de jogo
             SetBlockGridPosition(CurrentBlock, new Vector2i((Config.Game.PlayableSize.X - CurrentBlock.Size.X) / 2, 0));
-            
+
+            // Guardar o ID do bloco, para mostrar as estatisticas
+            Statistics.Add(CurrentBlock.ConfigBlockID, CurrentBlock.StatsColor);
+
             // Definir o próximo bloco
             NewNextBlock();
         }
@@ -271,7 +279,7 @@ namespace DSTris.Model
             var texture = new Texture($"{Config.Game.AssetsFolder}\\{configBlock.TextureName}");
 
             //
-            return new GameBlock(texture, configBlock.Parts);
+            return new GameBlock(configBlock.ID, configBlock.StatsColor, texture, configBlock.Parts);
         }
 
         // Verifica se uma determinada posição é valida para um bloco

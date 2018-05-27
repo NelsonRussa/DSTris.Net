@@ -1,11 +1,12 @@
-﻿using SFML.System;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using SFML.Graphics;
+using SFML.System;
 
 namespace DSTris.Model
 {
@@ -19,6 +20,8 @@ namespace DSTris.Model
                 public string TextureName { get; set; }
                 public Vector2f GameCoords { get; set; }
                 public Vector2f NextBlockCoords { get; set; }
+                public Vector2f StatsCoords { get; set; }
+                public float StatsMaxY { get; set; }
             }
 
             public string AssetsFolder { get; set; }
@@ -43,9 +46,11 @@ namespace DSTris.Model
         }
         public class BlockConfig
         {
+            public int ID { get; set; }
             public string TextureName { get; set; }
             public List<Vector2i> Parts { get; set; }
             public Vector2f Size { get; set; }
+            public Color StatsColor { get; set; }
         }
         //
         public GameConfig Game;
@@ -90,6 +95,10 @@ namespace DSTris.Model
             Game.Background.NextBlockCoords = new Vector2f(
                 Convert.ToSingle(nodeGameBackground.Attributes["nextBlockCoordX"].Value),
                 Convert.ToSingle(nodeGameBackground.Attributes["nextBlockCoordY"].Value));
+            Game.Background.StatsCoords = new Vector2f(
+                Convert.ToSingle(nodeGameBackground.Attributes["statsX"].Value),
+                Convert.ToSingle(nodeGameBackground.Attributes["statsY"].Value));
+            Game.Background.StatsMaxY = Convert.ToSingle(nodeGameBackground.Attributes["statsMaxY"].Value);
 
             // Config/Menu
             Menu = new MenuConfig();
@@ -104,9 +113,11 @@ namespace DSTris.Model
             // Blocks
             var nodeBlocks = xmlDocElem.SelectNodes("/config/blocks/block");
             Blocks = new List<BlockConfig>();
+            int nextID = 1;
             foreach (XmlNode nodeBlock in nodeBlocks)
             {
                 var block = new BlockConfig();
+                block.ID = nextID;
                 block.TextureName = nodeBlock.Attributes["textureName"].Value;
                 string[] blockLines = nodeBlock.InnerText.Trim().Split('\n');
                 block.Size = new Vector2f(blockLines[0].Trim().Length, blockLines.Length);
@@ -119,7 +130,11 @@ namespace DSTris.Model
                             block.Parts.Add(new Vector2i(c, l));
                     }
                 }
+                string[] color = nodeBlock.Attributes["statsColor"].Value.Split(',');
+                block.StatsColor = new Color(Convert.ToByte(color[0]), Convert.ToByte(color[1]), 
+                    Convert.ToByte(color[2]));
                 Blocks.Add(block);
+                nextID++;
             }
         }
 
